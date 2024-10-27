@@ -1,0 +1,72 @@
+.btn{
+  width : 190px;
+  height : 58px;
+  border : 2px;
+  border-radius: 6px;
+  background : #ff7c32;
+  color : white ;
+  display : flex;
+  justify-content :center;
+  align-items :center;
+  font-family: Rubik ;
+  font-size: 20px ;
+  font-weight: 600;
+  border : 2px solid white ;
+  box-sizing: border-box;
+}
+.logo{
+  height : 100px;
+  width : 122px;
+  display : flex;
+  align-items : center ;
+  justify-content : center;
+  .content{
+    height : 100px;
+  }
+}
+.container{
+  position :absolute;
+  left : 0px;
+  top : 0px;
+  width : 100vw;
+  height : 130px;
+  display : flex;
+  justify-content : center;
+  align-items : flex-end;
+  margin : auto ;
+  .header{
+    width : 90vw;
+    height : 100px;
+    display : flex;
+    justify-content :center;
+    align-items :center;
+    border : 2px solid white;
+    border-radius : 6px;
+    box-sizing : border-box ;
+    backdrop-filter: blur(16px);
+    .contain{
+      width : 90%;
+      height : 100px;
+      margin : auto ;
+      display:flex;
+      justify-content :space-between;
+      align-items :center ;
+      .navItems{
+        display : flex;
+        width : 275px ;
+        margin :auto;
+        justify-self: center;
+      }
+    }
+  }
+}
+.navItem{
+  margin-right: 40px ;
+  display : flex;
+  .content{
+    font-size : 20px;
+    color : white ;
+    font-weight: 600;
+    font-family: Rubik;
+  }
+}

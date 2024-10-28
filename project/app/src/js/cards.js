@@ -26,9 +26,22 @@ function Card(props) {
         <div className="card-btn">
           <div className="card-btn-text">{props.cardBtnText}</div>
           <div className="card-btn-icon">
+            <img src={props.cardBtnIcon} />
           </div>
         </div>
       </div>
     </div>
   )
 }
+function CardsPage(){
+  return(
+    <div>
+      <Title />
+      <Des />
+      <div>
+        <Card icon={"#"} cardTitle={"#"} cardDes={"#"} cardBtnText={"#"} cardBtnIcon={"#"}/>
+      </div>
+    </div>
+  )
+}
+export default CardsPage 

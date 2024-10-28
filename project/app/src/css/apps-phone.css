@@ -1,0 +1,54 @@
+.Apps{
+  margin-top: 85vh;
+  width : 100vw;
+  margin-left : -8px;
+  height : 700px;
+  background-image: url('../../public/appsbg.svg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  z-index: 2;
+}
+.textParent{
+  width : 90vw;
+  margin:auto;
+  display: flex;
+  justify-content:center;
+  align-items:center;
+  padding:10px;
+  color : white ;
+  font-size: 24px ;
+  font-family: Rubik;
+  font-weight: 700;
+  .text{
+    margin-top  : -100px ;
+  }
+}
+.btnsApp{
+  height : 50vw;
+  margin:auto;
+  padding:10px;
+  display : flex;
+  flex-direction: column;
+  justify-content  : space-between ;
+  align-items:center;
+  color : white ;
+  font-size:24px;
+  font-family: Rubik;
+  font-weight: 500;
+  margin-top  : 150px;
+}
+.btnApp{
+  color : white ;
+  font-size:20px;
+  font-family: Rubik;
+  font-weight: 500;
+  width: 85vw ;
+  height : 70px;
+  color: #ff7c37;
+  border-radius: 6px;
+  border : 2px solid #ff7c37 ;
+  background : transparent ;
+  display : flex;
+  justify-content : center;
+  align-items  : center;
+}

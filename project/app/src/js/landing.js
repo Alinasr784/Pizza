@@ -14,7 +14,7 @@ function Text() {
 };
 function Btns() {
   return (
-    <div className="btns">
+    <div className="btnslanding">
       <div className="order">Order Online</div>
       <div className="book">Book a Table</div>
     </div>

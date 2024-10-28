@@ -1,5 +1,9 @@
 import React from 'react';
-import '../css/header.css'
+if (window.innerWidth > 599) {
+  import('../css/header-tablet.css')
+} else {
+  import('../css/header-phone.css')
+}
 function Btn() {
   return (
     <div className="btn">Order Online</div>
@@ -20,20 +24,51 @@ function NavItem(props) {
   )
 }
 function Header() {
-  return (
-    <div className="container">
-      <div className="header">
-        <div className="contain">
-          <Logo />
-          <div className="navItems">
-            <NavItem name={'Home'} />
-            <NavItem name={'Menu'} />
-            <NavItem name={'Blog'} />
-            <NavItem name={'About'} />
+  const headerDes = () => {
+    if (window.innerWidth > 599) {
+      return (
+
+        <div>
+          <div className="container">
+            <div className="header">
+              <div className="contain">
+                <Logo />
+                <div className="navItems">
+                  <NavItem name={'Home'} />
+                  <NavItem name={'Menu'} />
+                  <NavItem name={'Blog'} />
+                  <NavItem name={'About'} />
+                </div>
+                <Btn />
+              </div>
+            </div>
           </div>
-          <Btn />
         </div>
-      </div>
+      )
+    } else {
+      return (
+        <div>
+          <Logo />
+          <div className="container">
+            <div className="header">
+              <div className="contain">
+                <div className="navItems">
+                  <NavItem name={'Home'} />
+                  <NavItem name={'Menu'} />
+                  <NavItem name={'Blog'} />
+                  <NavItem name={'About'} />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )
+    }
+  }
+
+  return (
+    <div>
+      {headerDes()}
     </div>
   )
 }

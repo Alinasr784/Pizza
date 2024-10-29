@@ -1,0 +1,198 @@
+.cardPage{
+  width : 100vw;
+  height : 130vh;
+  background-color: white;
+  display: flex;
+  flex-direction:column;
+}
+.cards-section-title{
+  width : 100vw;
+  margin : auto;
+  display : flex;
+  justify-content : center;
+  align-items : center;
+  font-size: 56px;
+  font-family: Rubik;
+  font-weight: 800;
+  color: #232323;
+  margin-top: 100px;
+  margin-bottom: 50px;
+}
+.cards-section-des{
+  width : 85vw;
+  margin : auto;
+  display : flex;
+  justify-content : center;
+  align-items : center;
+  font-size: 24px;
+  font-family: Rubik;
+  font-weight: 400;
+  color: #292929;
+  margin-bottom: 50px;
+}
+.cardSection{
+  width : 95vw;
+  margin : auto;
+  height : 450px;
+  display : flex;
+  justify-content : space-between;
+  align-items : center;
+  margin-top : -25px;
+
+}
+.card{
+  width : 270px;
+  height : 411px;
+  background-color: #F8F8F8;
+  border-radius: 6px;
+  display : flex;
+  flex-direction:column;
+  justify-content : center;
+  align-items : center;
+  border:2px solid black;
+}
+.icon{
+  width : 80px;
+  height : 80px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  img{
+    width : 100%;
+    height : 100%;
+  }
+}
+.card-title{
+  width : 100%;
+  font-size: 32px;
+  font-family: Rubik;
+  font-weight: 500;
+  color: #232323;
+  margin-bottom: 20px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+.card-des{
+  width : 250px;
+  margin-left : 8px;
+  font-size: 18px;
+  font-family: Rubik;
+  font-weight: 300;
+  color: #232323;
+  margin-top : 10px;
+  margin-bottom: 50px;
+}
+.card-btn{
+  width : 200px;
+  height : 50px;
+  color: #ff7c37;
+  display : flex;
+  justify-content : center;
+  align-items : center;
+  margin-top : -30px;
+  padding : 3px;
+  &:hover{
+    border : 2px solid #ff7c37;
+    border-radius:20px;
+  }
+}
+.card-btn-text{
+  font-size: 20px;
+  font-family: Rubik;
+  font-weight: 500;
+}
+.card-btn-icon{
+  width : 24px;
+  height : 24px;
+  margin-left: 10px;
+}
+#card1{
+  background-image: url('../../public//card1.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+#card2{
+  background-image: url('../../public//card2.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+#card3{
+  background-image: url('../../public//card3.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+#card4{
+  background-image: url('../../public//card4.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+
+.btnsCards{
+  display : flex;
+  justify-content : space-between ;
+  align-items : center ;
+  width : 35vw;
+  height : 98px;
+  margin : auto;
+  margin-top : -50px;
+  .order{
+    height : 53px;
+    width : 185px;
+    border-radius : 6px;
+    display : flex;
+    justify-content : center;
+    align-items : center;
+    font-size : 20px;
+    font-weight: 600;
+    background : #ff7c37 ;
+    color : white;
+    font-family: Rubik;
+  }
+  .book{
+    height : 53px;
+    width : 185px;
+    display : flex;
+    justify-content :center;
+    align-items :center;
+    font-size : 22px;
+    font-weight: 600;
+    font-family: Rubik;
+    color : #ff7c37;
+    border : 2px solid #ff7c37;
+    background : transparent ;
+    border-radius : 6px;
+    backdrop-filter: blur(16px);
+  }
+  .book:hover{
+    display : flex;
+    justify-content :center;
+    align-items :center;
+    font-size : 22px;
+    font-weight: 600;
+    font-family: Rubik;
+    color : white ;
+    border : 2px solid white;
+    background : #ff7c37 ;
+    border-radius : 6px;
+    animation-name: book;
+    animation-duration: 0.5s ;
+    animation-fill-mode: forwards;
+  }
+}
+@keyframes book {
+  from{
+    color : #ff7c37;
+    height : 53px;
+    width : 185px;
+    border : 2px solid white ;
+    background : transparent ;
+  }
+  to{
+    color : white;
+    height : 63px;
+    width : 195px;
+    border : 2px solid white;
+    background : #ff7c37;
+  }
+}

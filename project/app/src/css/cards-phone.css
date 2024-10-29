@@ -1,0 +1,174 @@
+*{
+  font-family: Rubik;
+}
+.cardPage {
+  width: 95vw;
+  margin: auto;
+  height: 170vh;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  overflow: hidden;
+  align-items: center;
+}
+
+.cards-section-title {
+  width: 90vw;
+  margin: auto;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 800;
+  color: #232323;
+  margin-top: 40px;
+  margin-bottom: 10px;
+}
+
+.cards-section-des {
+  width: 85vw;
+  margin: auto;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 400;
+  color: #292929;
+  margin-bottom: 20px;
+}
+
+.cardSection {
+  width: 90vw;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  width: 90vw;
+  margin: auto;
+  height: 200px; /* Larger height to fit all elements */
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ccc;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.icon {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  top: 80px;
+  left: 20px;
+}
+
+.icon img {
+  width: 100%;
+  height: 100%;
+}
+
+.card-title {
+  font-size: 28px;
+  color: #232323;
+  text-align: center;
+  font-weight: 500;
+  margin-top: 10px; /* Adjust to align under icon */
+}
+
+.card-des {
+  font-size: 18px;
+  color: #575757;
+  margin: auto;
+  text-align:left;
+  margin-left: 90px;
+  margin-top:20px;
+}
+
+.card-btn {
+  width: 80%;
+  height: 40px;
+  color: #ff7c37;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3px;
+  margin-top: auto;
+  margin-bottom: 10px; /* Add space at the bottom */
+  border-radius: 6px;
+}
+
+.card-btn-text {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.card-btn-icon {
+  width: 18px;
+  height: 18px;
+  margin-left: 5px;
+}
+#card1{
+  background-image: url('../../public//card1.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+#card2{
+  background-image: url('../../public//card2.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+#card3{
+  background-image: url('../../public//card3.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+#card4{
+  background-image: url('../../public//card4.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.btnsCards{
+  display : flex;
+  justify-content : space-between ;
+  align-items : center ;
+  width : 80vw ;
+  height : 98px;
+  margin : auto;
+  .order{
+    height : 43px;
+    width : 35vw ;
+    border-radius : 6px;
+    display : flex;
+    justify-content : center;
+    align-items : center;
+    text-align: center;
+    align-content: center;
+    font-size : 18px;
+    font-weight: 500;
+    background : #ff7c37 ;
+    color : white;
+    font-family: Rubik;
+    padding : -10px;
+  }
+  .book{
+    height : 43px;
+    width : 35vw ;
+    padding : -10px;
+    text-align: center;
+    align-content: center;
+    display : flex;
+    justify-content :center;
+    align-items :center;
+    font-size : 18px;
+    font-weight: 500;
+    font-family: Rubik;
+    color : #ff7c37;
+    border : 2px solid #ff7c37;
+    background : transparent ;
+    border-radius : 6px;
+    backdrop-filter: blur(16px);
+  }
+}

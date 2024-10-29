@@ -38,7 +38,6 @@
   margin-top  : 150px;
 }
 .btnApp{
-  color : white ;
   font-size:20px;
   font-family: Rubik;
   font-weight: 500;
@@ -51,4 +50,5 @@
   display : flex;
   justify-content : center;
   align-items  : center;
+  margin-bottom: 10px;
 }

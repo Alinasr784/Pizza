@@ -24,10 +24,10 @@ function Abs() {
   return (
     <div>
       <div className="slice">
-        <img src="//slice.png" />
+        <img src="/slice.png" />
       </div>
       <div className="slice2">
-        <img src="//half.png" />
+        <img src="/half.png" />
       </div>
       <div className="slice3">
         <img src="/small.png" alt="small"/>

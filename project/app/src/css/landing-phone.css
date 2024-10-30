@@ -123,24 +123,27 @@
     white-space :pre-wrap ;
   }
 }
-.slice{
-  position :absolute;
-  left: -200px ;
-  top: -10px;
-  transform:scale(0.25);
-  display : none;
+.slice {
+  position: relative;
+  left: -100px; /* تعديل لتناسب الموبايل */
+  top: -5px; /* تعديل لتناسب الموبايل */
+  transform: scale(0.5); /* تكبير لتكون أوضح */
+  display: none; /* عرض العنصر */
 }
-.slice2{
-  position :  absolute ;
-  right : -550px;
-  top : -125px;
-  transform : scale(0.1);
+
+.slice2 {
+  position: relative;
+  right: -500px; /* تقليل المسافة لتناسب الموبايل */
+  top: 10px; /* تعديل لتناسب الموبايل */
+  height: 80px; /* تعديل الحجم لتناسب الموبايل */
+  transform: scale(1.8); /* تقليل المقياس ليكون مناسب */
   z-index: 5;
 }
-.slice3{
-  position :absolute;
-  left : -76px;
-  top : 340px;
-  transform : scale(0.3);
-  display : none;
+
+.slice3 {
+  position: relative;
+  left: -40px; /* تعديل لتناسب الموبايل */
+  top: 200px; /* تعديل لتتناسب مع مكانها في الشاشة */
+  transform: scale(0.4); /* تكبير لتكون أوضح */
+  display: none; /* عرض العنصر */
 }

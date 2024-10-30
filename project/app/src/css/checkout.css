@@ -1,0 +1,92 @@
+/* checkout.css */
+.checkout-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f7f8fa;
+}
+
+.checkout-form {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.checkout-form h2 {
+  font-size: 22px;
+  color: #333333;
+  margin-bottom: 20px;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+.two-columns {
+  flex-direction: row;
+  gap: 10px;
+}
+
+.form-input {
+  padding: 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #333333;
+  background-color: #f9fafb;
+  transition: all 0.3s;
+}
+
+.form-input:focus {
+  border-color: #6366f1;
+  outline: none;
+  background-color: #ffffff;
+}
+
+.phone-input {
+  padding-left: 10px;
+  font-size: 15px;
+}
+
+.textarea {
+  height: 80px;
+  resize: none;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.cancel-button, .submit-button , .name{
+  width: 48%;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.cancel-button {
+  background-color: transparent;
+  border: 1px solid #d1d5db;
+  color: #333333;
+}
+
+.submit-button {
+  background-color: #6366f1;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  background-color: #4f46e5;
+}

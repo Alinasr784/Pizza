@@ -20,7 +20,8 @@
   align-items : center ;
   justify-content : center;
   .content{
-    height : 100px;
+    height : 120px;
+    width : 140px;
   }
 }
 .container{
@@ -39,10 +40,11 @@
     display : flex;
     justify-content :center;
     align-items :center;
-    border : 2px solid white;
+    border : 2px solid #ff7c32;
     border-radius : 6px;
     box-sizing : border-box ;
     backdrop-filter: blur(16px);
+    background:linear-gradient( rgba(0, 0, 0, 0.4), rgba(0,0,0, 0.4) ),url("/public/bg.jpg") ;
     .contain{
       width : 90%;
       height : 100px;
@@ -64,8 +66,8 @@
   display : flex;
   .content{
     font-size : 20px;
-    color : white ;
     font-weight: 600;
+    color: #fff;
     font-family: Rubik;
   }
 }

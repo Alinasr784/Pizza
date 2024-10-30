@@ -1,0 +1,35 @@
+.cart {
+  width: 60px;
+  height: 60px;
+  position: fixed; /* استخدم fixed هنا */
+  bottom: 10px; /* الموقع عند الأسفل */
+  right: 10px; /* الموقع من اليمين */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer; /* تغيير المؤشر ليظهر أنه يمكن السحب */
+  z-index: 1000; /* زيادة z-index لضمان ظهور العنصر فوق العناصر الأخرى */
+}
+
+.cart div {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.0); /* إضافة خلفية لتمييز الزر */
+}
+
+img {
+  width: 60px;
+  height: 60px;
+}
+
+@media (max-width: 768px) {
+  .cart {
+    bottom: 80px;
+    right: 15px;
+  }
+}

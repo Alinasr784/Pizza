@@ -91,9 +91,10 @@
   align-items : center;
   margin-top : -30px;
   padding : 3px;
+  overflow: hidden;
   &:hover{
     border : 2px solid #ff7c37;
-    border-radius:20px;
+    border-radius:10px;
   }
 }
 .card-btn-text{
@@ -101,7 +102,7 @@
   font-family: Rubik;
   font-weight: 500;
 }
-.card-btn-icon{
+.card-btn-icon img{
   width : 24px;
   height : 24px;
   margin-left: 10px;

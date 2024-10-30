@@ -110,7 +110,6 @@
 /* لون زر الطلب */
 .product-card-order {
   background : #ff7c37 ;
-  border : 2px solid white;
 }
 
 .product-card-order:hover {

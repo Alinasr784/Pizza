@@ -19,7 +19,7 @@ function Logo() {
 function NavItem(props) {
   return (
     <div className="navItem">
-      <div className="content">{props.name} </div>
+      <div className="content" onClick={props.onClick}>{props.name} </div>
     </div>
   )
 }
@@ -35,7 +35,7 @@ function Header() {
                 <Logo />
                 <div className="navItems">
                   <NavItem name={'Home'} />
-                  <NavItem name={'Menu'} />
+                  <NavItem name={'Menu'} onClick={()=>{scrollTo({top:2380,left:0,behavior:'smooth',})}}/>
                   <NavItem name={'Blog'} />
                   <NavItem name={'About'} />
                 </div>

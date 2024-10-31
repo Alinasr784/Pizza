@@ -13,9 +13,12 @@ function Text() {
   )
 };
 function Btns() {
+  const handleMenuClick = (path) => {
+    window.location.href = path; // توجيه المستخدم لصفحة checkout
+  };
   return (
     <div className="btnslanding">
-      <div className="order">Order Online</div>
+      <div className="order" onClick={()=>{handleMenuClick('/menu')}}>Order Online</div>
       <div className="book">Book a Table</div>
     </div>
   )
@@ -39,6 +42,7 @@ function Abs() {
 }
 
 function Landing() {
+  
   const ui = () => {
     if (window.innerWidth > 599) {
       return (

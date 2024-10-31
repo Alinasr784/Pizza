@@ -5,8 +5,11 @@ if (window.innerWidth > 599) {
   import('../css/header-phone.css')
 }
 function Btn() {
+  const handleMenuClick = (path) => {
+    window.location.href = path; // توجيه المستخدم لصفحة checkout
+  };
   return (
-    <div className="btn">Order Online</div>
+    <div className="btn" onClick={()=>{handleMenuClick('/menu')}}>Order Online</div>
   )
 }
 function Logo() {
@@ -56,8 +59,8 @@ function Header() {
             <div className="header">
               <div className="contain">
                 <div className="navItems">
-                  <NavItem name={'Home'} />
-                  <NavItem name={'Menu'} />
+                  <NavItem name={'Home'} onClick={()=>{handleMenuClick('/')}}/>
+                  <NavItem name={'Menu'} onClick={()=>{handleMenuClick('/menu')}}/>
                   <NavItem name={'Blog'} />
                   <NavItem name={'About'} />
                 </div>

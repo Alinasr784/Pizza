@@ -1,6 +1,9 @@
 import React from 'react';
-import '../css/shop-tablet.css'
-
+if (window.innerWidth > 599) {
+  import('../css/shop-tablet.css')
+} else {
+  import('../css/shop-phone.css')
+}
 function Product(props) {
   const handleOrderOnline = () => {
     window.location.href = '/checkout'; // توجيه المستخدم لصفحة checkout

@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
-import '../css/menu-tablet.css';
-
+if (window.innerWidth > 600) {
+  import('../css/menu-tablet.css')
+} else {
+  import('../css/menu-phone.css')
+}
 const SearchBar = ({ onSearch }) => {
     const handleInputChange = (event) => {
         onSearch(event.target.value); // تمرير القيمة المدخلة إلى مكون المتجر

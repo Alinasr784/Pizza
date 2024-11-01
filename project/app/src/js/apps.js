@@ -4,17 +4,17 @@ if (window.innerWidth > 599) {
 } else {
   import('../css/apps-phone.css')
 }
-function Text() {
+function TextApp() {
   return (
-    <div className="textParent">
-      <div className="text">Order online from your favorite app today</div>
+    <div className="textParent-app">
+      <div className="text-app">Order online Now</div>
     </div>
   )
 }
-function BtnApps(props) {
+function BtnAppsOrder(props) {
   return (
-    <div className="btnParent">
-      <div className="btnApp">{props.name}</div>
+    <div className="btnParent-app">
+      <div className="btnApp-app">{props.name}</div>
     </div>
   )
 }
@@ -22,12 +22,12 @@ function Apps() {
   const ui = () => {
     if (true) {
       return (
-        <div className="Apps">
-          <Text />
-          <div className="btnsApp">
-            <BtnApps name={"Talabat"} />
-            <BtnApps name={"Talabat"} />
-            <BtnApps name={"Talabat"} />
+        <div className="Apps-app">
+          <TextApp />
+          <div className="btnsApp-app">
+            <BtnAppsOrder name={"Talabat"} />
+            <BtnAppsOrder name={"Talabat"} />
+            <BtnAppsOrder name={"Talabat"} />
           </div>
         </div>
       )

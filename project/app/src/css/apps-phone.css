@@ -1,4 +1,4 @@
-.Apps{
+.Apps-app{
   margin-top: 85vh;
   width : 100vw;
   height : 700px;
@@ -7,7 +7,7 @@
   background-repeat: no-repeat;
   z-index: 2;
 }
-.textParent{
+.textParent-app{
   width : 90vw;
   margin:auto;
   display: flex;
@@ -18,11 +18,11 @@
   font-size: 24px ;
   font-family: Rubik;
   font-weight: 700;
-  .text{
-    margin-top  : -100px ;
+  .text-app{
+    margin-top  : 150px ;
   }
 }
-.btnsApp{
+.btnsApp-app{
   height : 50vw;
   margin:auto;
   padding:10px;
@@ -36,7 +36,7 @@
   font-weight: 500;
   margin-top  : 150px;
 }
-.btnApp{
+.btnApp-app{
   font-size:20px;
   font-family: Rubik;
   font-weight: 500;
@@ -50,4 +50,72 @@
   justify-content : center;
   align-items  : center;
   margin-bottom: 10px;
+}
+
+/* Animation */
+.Apps-app {
+  animation: backgroundScrollMobile 10s linear infinite;
+}
+
+@keyframes backgroundScrollMobile {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+.textParent-app {
+  animation: fadeInTextMobile 1s ease-out forwards;
+  opacity: 0;
+}
+
+@keyframes fadeInTextMobile {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.text-app {
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typingMobile 2s steps(20, end), blinkMobile 0.6s step-end infinite alternate;
+  display: inline-block;
+}
+
+@keyframes typingMobile {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blinkMobile {
+  50% {
+    border-right: 2px solid white;
+  }
+}
+
+.Apps-app {
+  opacity: 0;
+  animation: fadeInScaleMobile 1s ease-out forwards;
+}
+
+@keyframes fadeInScaleMobile {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }

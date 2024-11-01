@@ -1,13 +1,13 @@
-.Apps{
+.Apps-app{
   margin-top: 86vh;
   width : 100vw;
   height : 700px;
   background-image: url('../../public/appsbg.svg');
   background-size: cover;
   background-repeat: no-repeat;
-  z-index: 2;
+  z-index: 5;
 }
-.textParent{
+.textParent-app{
   width : 90vw;
   margin:auto;
   display: flex;
@@ -18,11 +18,11 @@
   font-size: 58px ;
   font-family: Rubik;
   font-weight: 800;
-  .text{
-    margin-top  : -200px ;
+  .text-app{
+    margin-top: 200px;
   }
 }
-.btnsApp{
+.btnsApp-app{
   width : 90vw;
   margin:auto;
   display: flex;
@@ -33,9 +33,9 @@
   font-size:24px;
   font-family: Rubik;
   font-weight: 500;
-  margin-top  : -200px ;
+  margin-top  : 180px ;
 }
-.btnApp{
+.btnApp-app{
   color : white ;
   font-size:24px;
   font-family: Rubik;
@@ -49,4 +49,94 @@
   display : flex;
   justify-content : center;
   align-items  : center;
+}
+
+
+/* Animation */  
+.Apps-app {
+  animation: backgroundScroll 15s linear infinite;
+}
+
+@keyframes backgroundScroll {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 100% 0%;
+  }
+}
+
+.textParent-app {
+  animation: fadeInText 1.5s ease-out forwards;
+  opacity: 0;
+}
+
+@keyframes fadeInText {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.text-app {
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typing 3s steps(15, end), blink 0.5s step-end infinite alternate;
+  display: inline-block;
+  margin-top: -200px;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 470px;
+  }
+}
+
+@keyframes blink {
+  50% {
+    border-right: 2px solid white;
+  }
+}
+
+.btnApp-app {
+  transition: transform 0.3s ease;
+}
+
+.btnApp-app:hover {
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.Apps-app {
+  opacity: 0;
+  animation: fadeInScale 1.5s ease-out forwards;
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }

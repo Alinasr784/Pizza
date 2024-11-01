@@ -1,4 +1,6 @@
+/* landing-phone.css */
 .landing {
+  animation: backgroundScrollMobile 10s linear infinite;
   position: absolute;
   left: 0;
   top: 0;
@@ -18,132 +20,240 @@
   width: 100%;
   height: 100%;
   background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75));
-  z-index: 1; /* أو خليها 1 لو فيه عناصر تانية فوقها */
+  z-index: 1; 
 }
-.btnslanding{
-  display : flex;
-  justify-content : space-between ;
-  align-items : center ;
-  position:relative;
-  top:250px ;
-  width : 80vw ;
-  height : 98px;
-  margin : auto;
-  .order{
-    height : 43px;
-    width : 35vw ;
-    border-radius : 6px;
-    display : flex;
-    justify-content : center;
-    align-items : center;
-    text-align: center;
-    align-content: center;
-    font-size : 18px;
-    font-weight: 500;
-    background : #ff7c37 ;
-    color : white;
-    font-family: Rubik;
-    padding : -10px;
-  }
-  .book{
-    height : 43px;
-    width : 35vw ;
-    padding : -10px;
-    text-align: center;
-    align-content: center;
-    display : flex;
-    justify-content :center;
-    align-items :center;
-    font-size : 18px;
-    font-weight: 500;
-    font-family: Rubik;
-    color : #ff7c37;
-    border : 2px solid #ff7c37;
-    background : transparent ;
-    border-radius : 6px;
-    backdrop-filter: blur(16px);
-  }
+
+.btnslanding {
+  display: flex;
+  flex-direction: column; /* جعل الأزرار عمودية */
+  align-items: center;
+  position: relative;
+  top: 250px;
+  width: 80vw;
+  height: auto; /* جعل الارتفاع تلقائي */
+  margin: auto;
 }
-@keyframes book {
-  from{
-    color : #ff7c37;
-    height : 53px;
-    width : 185px;
-    border : 2px solid white ;
-    background : transparent ;
-  }
-  to{
-    color : white;
-    height : 63px;
-    width : 195px;
-    border : 2px solid white;
-    background : #ff7c37;
-  }
+
+.btnslanding .orderBtn,
+.btnslanding .bookBtn {
+  height: 50px; /* زيادة الارتفاع للأزرار */
+  width: 90%; /* جعل الأزرار تأخذ 90% من عرض الشاشة */
+  border-radius: 6px;
+  background-color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 500;
+  font-family: Rubik;
+  margin-bottom: 10px; /* مسافة بين الأزرار */
 }
-.text{
-  position:relative;
-  top : 200px;
-  left : 0px;
-  width : 100vw;
-  height : 30vh ;
-  display : flex;
-  flex-direction :column;
-  justify-content :center ;
-  align-items :center;
-  margin-top : -50px;
-  .title{
-    font-size : 40px;
-    font-weight :900;
-    text-align: center;
-    width : 98vw;
-    margin:auto;
-    font-family: Rubik;
-    color : white;
-    display : flex;
-    justify-content : center;
-    div{
-      display : flex;
-      padding-right: 20px;
-      color:#ff7c37;
-    }
-  }
-  .des{
-    font-size: 17px;
-    font-weight: 400;
-    font-family: Rubik;
-    color : white;
-    margin-top : 10px;
-    max-width : 85vw ;
-    min-width: none ;
-    display : flex;
-    align-items : center ;
-    justify-content : center;
-    align-content: center ;
-    line-height: 25px;
-    white-space :pre-wrap ;
+.btnslanding .orderBtn {
+  background: #ff7c37;
+  color: white;
+}
+
+.btnslanding .bookBtn {
+  color: #ff7c37;
+  border: 2px solid #ff7c37;
+  background: transparent;
+  backdrop-filter: blur(16px);
+}
+
+.text {
+  position: relative;
+  top: 150px; /* تعديل الموضع العلوي للنص */
+  width: 100vw;
+  height: auto; /* جعل الطول تلقائي */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: -30px; /* تعديل الارتفاع */
+}
+
+.title {
+  font-size: 38px; /* تقليل حجم الخط */
+  font-weight: 900;
+  text-align: center;
+  width: 80vw; /* جعل العرض 90% */
+  margin: auto;
+  font-family: Rubik;
+  color: white;
+  flex-wrap: nowrap;
+  text-wrap: nowrap;
+  display: flex;
+
+  div {
+    display: flex;
+    padding-right: 20px;
+    color: #ff7c37;
   }
 }
+
+.des {
+  font-size: 14px; /* تقليل حجم الخط */
+  font-weight: 400;
+  font-family: Rubik;
+  color: white;
+  margin-top: 10px;
+  max-width: 90vw; /* جعل العرض الأقصى 90% */
+  line-height: 20px; /* تقليل المسافة بين الأسطر */
+  text-align: center; /* محاذاة النص في المنتصف */
+}
+
 .slice {
   position: relative;
-  left: -100px; /* تعديل لتناسب الموبايل */
-  top: -5px; /* تعديل لتناسب الموبايل */
-  transform: scale(0.5); /* تكبير لتكون أوضح */
-  display: none; /* عرض العنصر */
+  left: -20px; /* تعديل لتناسب الموبايل */
+  top: 10px; /* تعديل لتناسب الموبايل */
+  transform: scale(0.5);
+  display: none; /* جعل العنصر مرئي */
 }
 
 .slice2 {
   position: relative;
-  right: -500px; /* تقليل المسافة لتناسب الموبايل */
+  right: -50px; /* تعديل المسافة لتناسب الموبايل */
   top: 10px; /* تعديل لتناسب الموبايل */
-  height: 80px; /* تعديل الحجم لتناسب الموبايل */
-  transform: scale(1.8); /* تقليل المقياس ليكون مناسب */
+  height: 60px; /* تعديل الحجم لتناسب الموبايل */
+  transform: scale(1.2); /* تقليل المقياس ليكون مناسب */
   z-index: 5;
+  display: none;
 }
 
 .slice3 {
   position: relative;
-  left: -40px; /* تعديل لتناسب الموبايل */
-  top: 200px; /* تعديل لتتناسب مع مكانها في الشاشة */
-  transform: scale(0.4); /* تكبير لتكون أوضح */
-  display: none; /* عرض العنصر */
+  left: -20px; /* تعديل لتناسب الموبايل */
+  top: 20px; /* تعديل لتناسب الموبايل */
+  transform: scale(0.3); /* تعديل لتكون مناسبة للموبايل */
+  display: none; /* جعل العنصر مرئي */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px); /* تقليل التحرك عند الظهور */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.text .title,
+.text .des {
+  animation: fadeIn 1s ease forwards;
+  opacity: 0; /* اجعلها غير مرئية في البداية */
+}
+
+.text .title {
+  animation-delay: 0.2s; /* تأخير ظهور العنوان */
+}
+
+.text .des {
+  animation-delay: 0.4s; /* تأخير ظهور الوصف */
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  0%{
+    opacity: 0;
+  }
+  40% {
+    transform: translateY(-5px); /* تقليل التحرك في الارتفاع */
+  }
+  60% {
+    transform: translateY(-3px); /* تقليل التحرك في الارتفاع */
+  }
+  100%{
+    opacity: 1;
+  }
+}
+
+
+@keyframes brightnessChange {
+  0% {
+    filter: brightness(100%);
+  }
+  100% {
+    filter: brightness(80%); /* تغير سطوع الخلفية */
+  }
+}
+
+.landing {
+  animation: brightnessChange 5s ease-in-out infinite alternate;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(50%); /* تقليل التحرك عند الدخول */
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.slice,
+.slice2,
+.slice3 {
+  animation: slideIn 0.6s ease forwards; /* تقليل مدة التأثير */
+  opacity: 0; /* اجعلها غير مرئية في البداية */
+}
+
+.slice {
+  animation-delay: 0.5s; /* تأخير ظهور slice */
+}
+
+.slice2 {
+  animation-delay: 0.7s; /* تأخير ظهور slice2 */
+}
+
+.slice3 {
+  animation-delay: 0.9s; /* تأخير ظهور slice3 */
+}
+
+.orderBtn:hover,
+.bookBtn:hover {
+  transform: scale(1.03); /* تقليل تأثير التكبير عند التحويم */
+  transition: transform 0.2s ease; /* تقليل مدة الانتقال */
+}
+
+
+
+
+.btnslanding .orderBtn,
+.btnslanding .bookBtn {
+  /*opacity: 0;*/
+  animation: bounce 1s ease forwards;
+}
+.btnslanding .orderBtn {
+  animation-delay: 0.6s; /* تأخير ظهور الزر الأول */
+}
+
+.btnslanding .bookBtn {
+  animation-delay: 0.8s; /* تأخير ظهور الزر الثاني */
+}
+@keyframes backgroundMove {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 70%; /* تحريك الخلفية لأسفل */
+  }
+  100% {
+    background-position: 100% 40%; /* العودة إلى الوضع الأصلي */
+  }
+}
+
+@keyframes backgroundScrollMobile {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
 }

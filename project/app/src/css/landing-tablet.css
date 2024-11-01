@@ -4,6 +4,7 @@
 }
 
 .landing {
+  overflow: hidden;
   position: absolute;
   left: 0;
   top: 0;
@@ -21,7 +22,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 120%;
   background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75));
   z-index: 1; /* أو خليها 1 لو فيه عناصر تانية فوقها */
 }
@@ -35,7 +36,7 @@
   top : 540px;
   left : 430px;
   margin : auto;
-  .order{
+  .orderBtn{
     height : 53px;
     width : 185px;
     border-radius : 6px;
@@ -48,7 +49,7 @@
     color : white;
     font-family: Rubik;
   }
-  .book{
+  .bookBtn{
     height : 53px;
     width : 185px;
     display : flex;
@@ -62,37 +63,6 @@
     background : transparent ;
     border-radius : 6px;
     backdrop-filter: blur(16px);
-  }
-  .book:hover{
-    display : flex;
-    justify-content :center;
-    align-items :center;
-    font-size : 22px;
-    font-weight: 600;
-    font-family: Rubik;
-    color : white ;
-    border : 2px solid white;
-    background : #ff7c37 ;
-    border-radius : 6px;
-    animation-name: book;
-    animation-duration: 0.5s ;
-    animation-fill-mode: forwards;
-  }
-}
-@keyframes book {
-  from{
-    color : #ff7c37;
-    height : 53px;
-    width : 185px;
-    border : 2px solid white ;
-    background : transparent ;
-  }
-  to{
-    color : white;
-    height : 63px;
-    width : 195px;
-    border : 2px solid white;
-    background : #ff7c37;
   }
 }
 .text{
@@ -161,4 +131,137 @@
   img {
     transform : scale(2.5);
   }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.text .title,
+.text .des {
+  animation: fadeIn 1s ease forwards;
+  opacity: 0; /* اجعلها غير مرئية في البداية */
+}
+
+.text .title {
+  animation-delay: 0.2s; /* تأخير ظهور العنوان */
+}
+
+.text .des {
+  animation-delay: 0.4s; /* تأخير ظهور الوصف */
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  0%{
+    opacity: 0;
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+  100%{
+    opacity: 1;
+  }
+}
+
+.btnslanding .orderBtn,
+.btnslanding .bookBtn {
+  animation: bounce 1s ease forwards;
+  /*opacity: 0; *//* اجعلها غير مرئية في البداية */
+}
+
+.btnslanding .order {
+  animation-delay: 0.6s; /* تأخير ظهور الزر الأول */
+}
+
+.btnslanding .book {
+  animation-delay: 0.8s; /* تأخير ظهور الزر الثاني */
+}
+
+@keyframes backgroundZoom {
+  0% {
+    background-size: 110%;
+  }
+  100% {
+    background-size: 100%;
+  }
+}
+
+.landing {
+  animation: backgroundZoom 5s ease-in-out infinite alternate; /* تأثير زوم للخلفية */
+}
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.slice,
+.slice2,
+.slice3 {
+  animation: slideIn 0.8s ease forwards;
+  opacity: 0; /* اجعلها غير مرئية في البداية */
+}
+
+.slice {
+  animation-delay: 0.5s; /* تأخير ظهور slice */
+}
+
+.slice2 {
+  animation-delay: 0.7s; /* تأخير ظهور slice2 */
+}
+
+.slice3 {
+  animation-delay: 0.9s; /* تأخير ظهور slice3 */
+}
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.slice,
+.slice2,
+.slice3 {
+  animation: slideIn 0.8s ease forwards;
+  opacity: 0; /* اجعلها غير مرئية في البداية */
+}
+
+.slice {
+  animation-delay: 0.5s; /* تأخير ظهور slice */
+}
+
+.slice2 {
+  animation-delay: 0.7s; /* تأخير ظهور slice2 */
+}
+
+.slice3 {
+  animation-delay: 0.9s; /* تأخير ظهور slice3 */
+}
+.orderBtn:hover,
+.bookBtn:hover {
+  transform: scale(1.05); /* تكبير الزر عند التحويم */
+  transition: transform 0.3s ease; /* تأثير انتقال سلس */
 }

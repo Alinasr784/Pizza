@@ -4,22 +4,22 @@ if (window.innerWidth > 599) {
 } else {
   import('../css/shop-phone.css')
 }
-function Product(props) {
+function ProductShop(props) {
   const handleOrderOnline = () => {
     window.location.href = '/checkout'; // توجيه المستخدم لصفحة checkout
   };
 
   return (
     <div>
-      <div className="product-card">
-        <div className="product-card-img">
+      <div className="product-card-shop">
+        <div className="product-card-img-shop">
           <img src={props.img} alt={props.name} />
         </div>
-        <div className="product-card-name">{props.name}</div>
-        <div className="product-card-price">{props.price ? props.price : "$0.00"}</div>
-        <div className="product-card-buttons">
-          <div className="product-card-order" onClick={handleOrderOnline}>Order Online</div>
-          <div className="product-card-add">Add to Cart</div>
+        <div className="product-card-name-shop">{props.name}</div>
+        <div className="product-card-price-shop">{props.price ? props.price : "$0.00"}</div>
+        <div className="product-card-buttons-shop">
+          <div className="product-card-order-shop" onClick={handleOrderOnline}>Order Online</div>
+          <div className="product-card-add-shop">Add to Cart</div>
         </div>
       </div>
     </div>
@@ -27,21 +27,24 @@ function Product(props) {
 }
 function Shop(){
   return(
-    <div className="shop">
-      <div className="shop-section-title">Our Delicious Dishes</div>
-      <div className="shop-section-content">
-        <Product img={"/small.png"} name={"Pizza test"} price={"$10.00"} />
-        <Product img={"/small.png"} name={"Pizza test"} price={"$10.00"} />
-        <Product img={"/small.png"} name={"Pizza test"} price={"$10.00"} />
-        <Product img={"/small.png"} name={"Pizza test"} price={"$10.00"} />
-        <Product img={"/small.png"} name={"Pizza test"} price={"$10.00"} />
-        <Product img={"/small.png"} name={"Pizza test"} price={"$10.00"} />
-        <Product img={"/small.png"} name={"Pizza test"} price={"$10.00"} />
-        <Product img={"/small.png"} name={"Pizza test"} price={"$10.00"} />
-        <Product img={"/small.png"} name={"Pizza test"} price={"$10.00"} />
-        <Product img={"/small.png"} name={"Pizza test"} price={"$10.00"} />
-        <Product img={"/small.png"} name={"Pizza test"} price={"$10.00"} />
-        <Product img={"/small.png"} name={"Pizza test"} price={"$10.00"} />
+    <div className="shop-shop">
+      <div className="shop-section-title-shop">Our Delicious Dishes</div>
+      <div className="shop-section-content-shop">
+        <ProductShop img={"/small.png"} name={"Pizza test"} price={"$10.00"} />
+        <ProductShop img={"/small.png"} name={"Pizza test"} price={"$10.00"} />
+        <ProductShop img={"/small.png"} name={"Pizza test"} price={"$10.00"} />
+        <ProductShop img={"/small.png"} name={"Pizza test"} price={"$10.00"} />
+        <ProductShop img={"/small.png"} name={"Pizza test"} price={"$10.00"} />
+        <ProductShop img={"/small.png"} name={"Pizza test"} price={"$10.00"} />
+        <ProductShop img={"/small.png"} name={"Pizza test"} price={"$10.00"} />
+        <ProductShop img={"/small.png"} name={"Pizza test"} price={"$10.00"} />
+        <ProductShop img={"/small.png"} name={"Pizza test"} price={"$10.00"} />
+        <ProductShop img={"/small.png"} name={"Pizza test"} price={"$10.00"} />
+        <ProductShop img={"/small.png"} name={"Pizza test"} price={"$10.00"} />
+        <ProductShop img={"/small.png"} name={"Pizza test"} price={"$10.00"} />
+        <ProductShop img={"/small.png"} name={"Pizza test"} price={"$10.00"} />
+        <ProductShop img={"/small.png"} name={"Pizza test"} price={"$10.00"} />
+
 
       </div>
     </div>

@@ -6,7 +6,7 @@ import Landing from './js/landing';
 import Apps from './js/apps';
 import CardPage from './js/cards';
 import Shop from './js/shop';
-import Checkout from './js/checkout'; 
+import FormBold from './js/comOrder'; 
 import CartBtn from './js/cartbtn';
 import Menu from './js/menu';
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -36,7 +36,7 @@ root.render(
       <Header />
       <Routes> 
         <Route path="/" element={<Home />} /> {/* الصفحة الرئيسية */}
-        <Route path="/checkout" element={<Checkout />} /> {/* صفحة الدفع */}
+        <Route path="/checkout" element={<FormBold />} /> {/* صفحة الدفع */}
         <Route path="/menu" element={<Store />} />
       </Routes>
     </Router>

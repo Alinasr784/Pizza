@@ -1,99 +1,15 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { db } from './firebaseconfig';
 import { collection, getDocs } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import CartBtn from './cartbtn';
+
 // استدعاء CSS بناءً على عرض الشاشة
 if (window.innerWidth > 599) {
   import('../css/menu-tablet.css');
 } else {
   import('../css/menu-phone.css');
-}
-
-
-function CartBtn({ cartCount, onCartClick , isCartVisible, cart}) { // إضافة onCartClick كـ prop
-  const cartRef = useRef(null);
-  const pressTimer = useRef(null);
-
-  useEffect(() => {
-    const cart = cartRef.current;
-    let offsetX, offsetY;
-
-    const startDrag = (e) => {
-      e.preventDefault();
-      offsetX = e.clientX ? e.clientX - cart.getBoundingClientRect().left : e.touches[0].clientX - cart.getBoundingClientRect().left;
-      offsetY = e.clientY ? e.clientY - cart.getBoundingClientRect().top : e.touches[0].clientY - cart.getBoundingClientRect().top;
-
-      document.addEventListener('mousemove', onDrag);
-      document.addEventListener('mouseup', stopDrag);
-      document.addEventListener('touchmove', onDrag, { passive: false });
-      document.addEventListener('touchend', stopDrag);
-    };
-
-    const onDrag = (e) => {
-      const x = (e.clientX ? e.clientX : e.touches[0].clientX) - offsetX;
-      const y = (e.clientY ? e.clientY : e.touches[0].clientY) - offsetY;
-
-      cart.style.left = `${x}px`;
-      cart.style.top = `${y}px`;
-    };
-
-    const stopDrag = () => {
-      document.removeEventListener('mousemove', onDrag);
-      document.removeEventListener('mouseup', stopDrag);
-      document.removeEventListener('touchmove', onDrag);
-      document.removeEventListener('touchend', stopDrag);
-    };
-
-    const longPressHandler = (e) => {
-      e.preventDefault();
-      pressTimer.current = setTimeout(() => {
-        startDrag(e);
-      }, 800);
-    };
-
-    const clearLongPress = () => {
-      clearTimeout(pressTimer.current);
-    };
-
-    cart.addEventListener('touchstart', longPressHandler, { passive: false });
-    cart.addEventListener('touchend', clearLongPress);
-    cart.addEventListener('mousedown', longPressHandler);
-    cart.addEventListener('mouseup', clearLongPress);
-    cart.addEventListener('click', onCartClick); // إضافة حدث click هنا
-
-    return () => {
-      cart.removeEventListener('touchstart', longPressHandler);
-      cart.removeEventListener('touchend', clearLongPress);
-      cart.removeEventListener('mousedown', longPressHandler);
-      cart.removeEventListener('mouseup', clearLongPress);
-      cart.removeEventListener('click', onCartClick); // تنظيف حدث click
-    };
-  }, [onCartClick]); // إضافة onCartClick كـ dependency
-
-  return (
-    <div className="cart" ref={cartRef} onClick={onCartClick}>
-      <div>
-        <img src="/cart.svg" alt="Cart Icon" />
-        <span className="cart-item-count">{cartCount}</span>
-      </div>
-      {isCartVisible && (
-        <div className="cart-popup">
-          {cart.length > 0 ? (
-            cart.map((item, index) => (
-              <div key={index}>
-                <img src={item.img} alt={item.name} />
-                <span>{item.name}</span>
-                <span>Price: {item.price}</span>
-                <span>Quantity: {item.quantity}</span>
-              </div>
-            ))
-          ) : (
-            <div>Your cart is empty!</div>
-          )}
-        </div>
-      )}
-    </div>
-  );
 }
 
 const SearchBar = ({ onSearch }) => {
@@ -150,8 +66,6 @@ function SingleRowProductDisplay({ products, onOrderOnline, onAddToCart }) {
   );
 }
 
-
-
 function Store() {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
@@ -161,8 +75,7 @@ function Store() {
   const [products, setProducts] = useState([]);
   const [uniqueTypes, setUniqueTypes] = useState([]);
   const [filtered, setFiltered] = useState([]);
-  const [cart, setCart] = useState([]);
-  const [isCartVisible, setCartVisible] = useState(false);
+  const [cart, setCart] = useState([]); // حالة cart لتخزين المنتجات
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -174,6 +87,7 @@ function Store() {
       }));
       setProducts(productData);
 
+      // احصل على الأنواع الفريدة
       const uniqueTypes = [...new Set(productData.flatMap(product => product.types))];
       setUniqueTypes(uniqueTypes);
     };
@@ -181,14 +95,9 @@ function Store() {
     fetchProduct();
   }, []);
 
-  const handleCartClick = () => {
-    console.log("Cart button clicked" , cart);
-    setCartVisible(!isCartVisible);
-  };
-
   useEffect(() => {
     const filteredProducts = products.filter(product => {
-      const priceValue = parseFloat(product.price);
+      const priceValue = parseFloat(product.price); // تأكد أن price هو عدد
       const isInPriceRange = priceValue >= priceRange[0] && priceValue <= priceRange[1];
       const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase());
       const matchesCategory = selectedCategory === 'All' || product.types.includes(selectedCategory);
@@ -208,16 +117,28 @@ function Store() {
   };
 
   const handleAddToCart = (product) => {
-    setCart(prevCart => {
-      const existingProduct = prevCart.find(item => item.id === product.id);
-      if (existingProduct) {
-        return prevCart.map(item =>
-          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
-        );
+    setCart([...cart, product]);
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      color:'#ff7c37',
+      background: "#333",
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer;
+        toast.onmouseleave = Swal.resumeTimer;
       }
-      return [...prevCart, { ...product, quantity: 1 }];
+    });
+    Toast.fire({
+      icon: "success",
+      title: "Added Successfully"
     });
   };
+  useEffect(()=>{
+    localStorage.setItem("cartItems",JSON.stringify(cart))
+  },[cart])
 
   const toggleHeight = () => {
     setIsMinimized(!isMinimized);
@@ -225,16 +146,11 @@ function Store() {
 
   return (
     <div className="shop">
-      <CartBtn 
-        cartCount={cart.reduce((total, item) => total + item.quantity, 0)} 
-        onCartClick={handleCartClick} 
-        isCartVisible={isCartVisible} 
-        cart={cart} // أضف cart هنا
-      />
+      <CartBtn/>
       <SearchBar onSearch={setSearchTerm} />
       <div className="shop-section-title">Our Menu</div>
       <SingleRowProductDisplay 
-        products={filtered}
+        products={filtered} // استخدم filtered هنا
         onOrderOnline={handleOrderOnline}
         onAddToCart={handleAddToCart}
       />
@@ -271,9 +187,25 @@ function Store() {
           />
         </label>
       </div>
+      <div className="shop-section-content">
+        {filtered.length > 0 ? (
+          filtered.map((product, index) => (
+            <Product
+              key={index}
+              img={product.img}
+              name={product.name}
+              price={product.price}
+              onOrderOnline={handleOrderOnline}
+              onAddToCart={handleAddToCart}
+              product={product}
+            />
+          ))
+        ) : (
+          <div className="no-results">There are no results matching your search!</div>
+        )}
+      </div>
     </div>
   );
 }
-
 
 export default Store;

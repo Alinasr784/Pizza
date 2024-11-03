@@ -8,6 +8,7 @@ import CardPage from './js/cards';
 import Shop from './js/shop';
 import FormBold from './js/comOrder'; 
 import Menu from './js/menu';
+import CartShop from './js/cartshop';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 function Home(){
   return (
@@ -35,6 +36,7 @@ root.render(
         <Route path="/" element={<Home />} /> {/* الصفحة الرئيسية */}
         <Route path="/checkout" element={<FormBold />} /> {/* صفحة الدفع */}
         <Route path="/menu" element={<Store />} />
+        <Route path="/cart" element={<CartShop />} />
       </Routes>
     </Router>
   </React.StrictMode>

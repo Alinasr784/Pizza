@@ -1,181 +1,106 @@
-import React, { useEffect, useState } from 'react';
-import { db } from './firebaseconfig';
-import Swal from 'sweetalert2';
-import { collection, addDoc } from 'firebase/firestore';
+import React, { useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom';
 
-const CartShop = () => {
-  const [cartItems, setCartItems] = useState([]);
-  const [formData, setFormData] = useState({
-    firstname: '',
-    lastname: '',
-    phone: '',
-    address: '',
-    notes: '',
-    quantity: 1
-  });
-  const [showForm, setShowForm] = useState(true);
-  const [showSummary, setShowSummary] = useState(false);
+function CartShopEl(props) {
+  // Handle quantity change for the specific product
+  const handleQuantityChange = (num) => {
+    const newQuantity = props.quantity + num;
+    if (newQuantity >= 1) {
+      props.onQuantityChange(props.id, newQuantity);
+    }
+  };
 
-  // Load cart items from local storage
+  return (
+    <div className="product-container-cart">
+      <img src={props.img} alt="Product" className="product-image-cart" />
+      <div className="product-details-cart">
+        <span className="product-name-cart">{props.name}</span>
+        <div className="quantity-controls-cart">
+          <button onClick={() => handleQuantityChange(-1)}>-</button>
+          <span className="quantity-cart">{props.quantity}</span>
+          <button onClick={() => handleQuantityChange(1)}>+</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function CartShop() {
+  const [data, setData] = useState([]);
+  const [total, setTotal] = useState(0);
+  const [uniqueProducts, setUniqueProducts] = useState([]);
+  const navigate = useNavigate();
+
+  // Get products from local Storage and set initial quantity
   useEffect(() => {
-    const storedCartItems = JSON.parse(localStorage.getItem("cartItems"));
-    if (storedCartItems) setCartItems(storedCartItems);
+    const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+    const itemsWithQuantity = cartItems.map((item) => ({
+      ...item,
+      quantity: item.quantity || 1  // Add quantity: 1 if it doesn't exist
+    }));
+    setData(itemsWithQuantity);
   }, []);
 
-  const handleQuantityChange = (change, index) => {
-    setCartItems((prevItems) =>
-      prevItems.map((item, i) =>
-        i === index ? { ...item, quantity: Math.max(1, item.quantity + change) } : item
-      )
+  // Calculate total price
+  useEffect(() => {
+    const total = data.reduce(
+      (acc, item) => acc + item.price * item.quantity,
+      0
     );
-  };
+    setTotal(total);
+  }, [data]);
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
+  // Find unique products from data and count their occurrences
+  useEffect(() => {
+    const unique = data.reduce((acc, item) => {
+      const existingItem = acc.find((obj) => obj.id === item.id);
+      if (existingItem) {
+        existingItem.count += item.quantity; // Adjust count based on quantity
+      } else {
+        acc.push({ ...item, count: item.quantity });
+      }
+      return acc;
+    }, []);
+    setUniqueProducts(unique);
+  }, [data]);
 
-  const validateForm = () => {
-    const { firstname, lastname, phone, address } = formData;
-    if (!firstname || !lastname || !phone || !address) {
-      Swal.fire("Error", "Please fill in all required fields.", "error");
-      return false;
-    }
-    return true;
-  };
+  // Handle quantity change for a specific product
+  const handleQuantityChange = (id, newQuantity) => {
+    const updatedData = data.map((item) => {
+      if (item.id === id) {
+        return { ...item, quantity: newQuantity }; // تحديث الكمية فقط
+      }
+      return item; // إعادة الكائن كما هو إذا لم يكن هو العنصر المطلوب
+    });
 
-  const handleSubmit = () => {
-    if (validateForm()) {
-      setShowSummary(true);
-      setShowForm(false);
-    }
-  };
-
-  const handleSubmitOrder = async () => {
-    if (!validateForm()) return;
-
-    try {
-      await addDoc(collection(db, "orders"), {
-        ...formData,
-        products: cartItems.map(({ name, img, price, quantity }) => ({
-          name,
-          img,
-          price,
-          quantity
-        })),
-        deliveryFee: 5,
-        totalPrice: cartItems.reduce((total, item) => total + item.price * item.quantity, 5), // Add $5 delivery
-        orderDate: new Date().toISOString(),
-      });
-      Swal.fire({
-        title: "Success",
-        text: "Order placed successfully!",
-        icon: "success",
-        confirmButtonText: "OK",
-      }).then(() => {
-        window.location.href = "/menu";
-      });
-    } catch (error) {
-      Swal.fire("Error", "Error placing order. Please try again.", "error");
-    }
+    setData(updatedData); // تحديث الحالة
+    localStorage.setItem("cartItems", JSON.stringify(updatedData)); // تحديث البيانات في localStorage
   };
 
   return (
     <div className="formbold-main-wrapper-cart">
       <div className="formbold-form-wrapper-cart">
-        {showForm && (
-          <>
-            <div className="formbold-input-flex-cart">
-              <div className="formbold-mb-3-cart">
-                <input
-                  type="text"
-                  name="firstname"
-                  placeholder="First Name"
-                  className="formbold-form-input-cart"
-                  value={formData.firstname}
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div className="formbold-mb-3-cart">
-                <input
-                  type="text"
-                  name="lastname"
-                  placeholder="Last Name"
-                  className="formbold-form-input-cart"
-                  value={formData.lastname}
-                  onChange={handleInputChange}
-                />
-              </div>
-            </div>
-            <div className="formbold-mb-3-cart">
-              <input
-                type="number"
-                name="phone"
-                placeholder="Phone Number"
-                className="formbold-form-input-cart"
-                value={formData.phone}
-                onChange={handleInputChange}
-                maxLength="11"
-              />
-            </div>
-            <div className="formbold-mb-3-cart">
-              <input
-                type="text"
-                name="address"
-                placeholder="Address"
-                className="formbold-form-input-cart"
-                value={formData.address}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="formbold-mb-3-cart">
-              <textarea
-                rows="3"
-                name="notes"
-                placeholder="Additional notes"
-                className="formbold-form-input-cart"
-                value={formData.notes}
-                onChange={handleInputChange}
-              ></textarea>
-            </div>
-            {cartItems.map((item, index) => (
-              <div key={index} className="product-container-cart">
-                <img src={item.img} alt="Product" className="product-image-cart" />
-                <div className="product-details-cart">
-                  <span className="product-name-cart">{item.name}</span>
-                  <div className="quantity-controls-cart">
-                    <button onClick={() => handleQuantityChange(-1, index)}>-</button>
-                    <span className="quantity-cart">{item.quantity}</span>
-                    <button onClick={() => handleQuantityChange(1, index)}>+</button>
-                  </div>
-                </div>
-              </div>
-            ))}
-            <button type="button" className="formbold-btn-cart" onClick={handleSubmit}>
-              Continue
-            </button>
-          </>
-        )}
-
-        {showSummary && (
-          <div className="order-summary-cart">
-            <h2>Order Summary</h2>
-            {cartItems.map((item, index) => (
-              <div key={index} className="summary-product-cart">
-                <img src={item.img} alt="Product" />
-                <p><strong>Product:</strong> {item.name}</p>
-                <p><strong>Quantity:</strong> {item.quantity}</p>
-                <p><strong>Price:</strong> ${item.price}</p>
-              </div>
-            ))}
-            <p><strong>Delivery Cost:</strong> $5.00</p>
-            <p><strong>Total Price:</strong> ${(cartItems.reduce((total, item) => total + item.price * item.quantity, 5)).toFixed(2)}</p>
-            <button className="order-now-btn" onClick={handleSubmitOrder}>Order Now</button>
-          </div>
-        )}
+        {uniqueProducts.map((product) => (
+          <CartShopEl
+            key={product.id}
+            id={product.id}
+            name={product.name}
+            img={product.img}
+            quantity={product.count} // Use `count` for the quantity in unique products
+            onQuantityChange={handleQuantityChange}
+          />
+        ))}
+        <h3>Total: ${total}</h3>
+        <button 
+          className="checkout-cart" 
+          id="to-checkout"
+          onClick={() => navigate("/checkout", { state: uniqueProducts })}
+        >
+          Checkout Now
+        </button>
       </div>
     </div>
   );
-};
+}
 
 export default CartShop;

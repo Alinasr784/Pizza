@@ -1,0 +1,81 @@
+.formbold-main-wrapper-checkout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: #f9f9f9; /* لون الخلفية */
+  min-height: 100vh; /* ملء الشاشة */
+}
+
+.formbold-form-wrapper-checkout {
+  background: #ffffff; /* لون الخلفية للنموذج */
+  border-radius: 8px; /* زوايا دائرية */
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* ظل خفيف */
+  width: 100%;
+  max-width: 500px; /* عرض أقصى للنموذج */
+}
+
+
+/* إضافة تنسيقات جديدة لصورة المنتج */
+.product-container {
+  display: flex;
+  align-items: center; /* محاذاة العناصر عموديًا */
+  margin-top: 15px; /* مسافة بين الحقول السابقة وصورة المنتج */
+  border: 1px solid #ccc; /* حدود خفيفة حول عنصر المنتج */
+  padding: 10px; /* حشوة داخلية */
+  border-radius: 4px; /* زوايا دائرية */
+  margin-bottom:15px
+}
+
+.product-image {
+  width: 50px; /* عرض الصورة */
+  height: 50px; /* ارتفاع الصورة */
+  margin-right: 10px; /* مسافة بين الصورة واسم المنتج */
+  margin-bottom:5px;
+}
+
+.product-details {
+  display: flex;
+  flex-direction: column; /* توزيع العناصر بشكل عمودي */
+}
+
+.product-name {
+  font-weight: bold; /* جعل اسم المنتج غامق */
+  margin-bottom: 15px; /* مسافة بين الاسم وزر التحكم */
+  width:50%;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center; /* محاذاة العناصر عموديًا */
+  margin-top: 5px; /* مسافة بين الاسم وأزرار التحكم */
+}
+
+.quantity-controls button {
+  background-color: #007bff; /* لون خلفية الزر */
+  color: gray; /* لون النص */
+  padding: 5px 10px; /* حشوة داخلية */
+  border: none; /* إزالة الحدود */
+  border-radius: 4px; /* زوايا دائرية */
+  cursor: pointer; /* تغيير المؤشر عند التمرير فوق الزر */
+  font-size: 14px; /* حجم الخط */
+  margin: 0 5px; /* مسافة بين الأزرار */
+}
+
+.quantity {
+  font-size: 16px; /* حجم الخط للعدد */
+  margin: 0 10px; /* مسافة حول العدد */
+}
+#to-checkout {
+  background-color: #007bff; /* لون خلفية الزر */
+  color: white; /* لون النص */
+  padding: 10px; /* حشوة داخلية للزر */
+  border: none; /* إزالة الحدود */
+  border-radius: 4px; /* زوايا دائرية للزر */
+  cursor: pointer; /* تغيير المؤشر عند التمرير فوق الزر */
+  font-size: 16px; /* حجم الخط */
+  transition: background-color 0.3s; /* تأثير الانتقال عند تغيير اللون */
+  width: 100%; /* عرض الزر 100% */
+  margin-bottom:80px;
+}

@@ -5,6 +5,7 @@
   padding: 20px;
   background-color: #f9f9f9; /* لون الخلفية */
   min-height: 100vh; /* ملء الشاشة */
+  margin-top:100px;
 }
 
 .formbold-form-wrapper-checkout {
@@ -51,6 +52,7 @@
   font-size: 16px; /* حجم الخط */
   transition: background-color 0.3s; /* تأثير الانتقال عند تغيير اللون */
   width: 100%; /* عرض الزر 100% */
+  margin-bottom:80px;
 }
 
 .formbold-btn-checkout:hover {
@@ -169,6 +171,7 @@
   font-size: 16px; /* حجم الخط للزر */
   font-weight: bold; /* جعل النص عريض */
   transition: background-color 0.3s, transform 0.2s; /* تأثيرات التحويل */
+  margin-bottom: 80px;
 }
 
 .order-now-btn:hover {
@@ -182,4 +185,10 @@
   background-color: #3085d6;
   color: white;
   font-size: 16px;
+}
+hr{
+  margin-bottom: 40px;
+}
+.totalPrice{
+  text-align: left;
 }

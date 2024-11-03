@@ -110,7 +110,7 @@ function Store() {
 
   const handleOrderOnline = (product) => {
     if (product && product.img && product.name) {
-      navigate('/checkout', { state: { img: product.img, name: product.name, price: product.price } });
+      navigate('/checkout', { state: [{ img: product.img, name: product.name, price: product.price, quantity:product.quantity}] });
     } else {
       console.error("Product data is missing:", product);
     }
@@ -136,9 +136,22 @@ function Store() {
       title: "Added Successfully"
     });
   };
-  useEffect(()=>{
-    localStorage.setItem("cartItems",JSON.stringify(cart))
-  },[cart])
+
+  useEffect(() => {
+    // جمع العناصر الفريدة وإضافة خاصية quantity
+    const uniqueItems = cart.reduce((acc, item) => {
+      const existingItem = acc.find((obj) => obj.id === item.id);
+      if (existingItem) {
+        existingItem.quantity += 1; // زيادة الكمية بمقدار 1
+      } else {
+        acc.push({ ...item, quantity: 1 }); // إضافة العنصر الجديد مع quantity 1
+      }
+      return acc;
+    }, []);
+
+    // تخزين البيانات المحدثة في localStorage
+    localStorage.setItem("cartItems", JSON.stringify(uniqueItems));
+  }, [cart]);
 
   const toggleHeight = () => {
     setIsMinimized(!isMinimized);

@@ -1,21 +1,26 @@
-import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import { db } from './firebaseconfig';
-import { collection, addDoc } from 'firebase/firestore';
-import Swal from 'sweetalert2';
-import '../css/comOrders.css';
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { db } from "./firebaseconfig";
+import { collection, addDoc } from "firebase/firestore";
+import Swal from "sweetalert2";
+import "../css/comOrders.css";
 
 const SimpleForm = () => {
   const location = useLocation();
-  const { img, name, price } = location.state || {};
+  const data = location.state || []; // تأكد من وجود البيانات
+  const [products,setProduct]=useState([])
+  const [total,setTotal]=useState(0)
+
+  useEffect(()=>{
+    setProduct(data)
+  },[data])
 
   const [formData, setFormData] = useState({
-    firstname: '',
-    lastname: '',
-    phone: '',
-    address: '',
-    notes: '',
-    quantity: 1,
+    firstname: "",
+    lastname: "",
+    phone: "",
+    address: "",
+    notes: "",
   });
 
   const [showSummary, setShowSummary] = useState(false);
@@ -29,11 +34,30 @@ const SimpleForm = () => {
     });
   };
 
-  const handleQuantityChange = (change) => {
-    setFormData((prevState) => ({
-      ...prevState,
-      quantity: Math.max(1, prevState.quantity + change),
-    }));
+  /*const handleQuantityChange2 = (index, change) => {
+    setQuantities((prevQuantities) => {
+      const newQuantities = [...prevQuantities];
+      newQuantities[index] = Math.max(1, newQuantities[index] + change);
+      return newQuantities;
+    });
+  };*/
+
+  // Calculate total price
+  useEffect(() => {
+    const total = products.reduce(
+      (acc, item) => acc + item.price * item.quantity,
+      0
+    );
+    setTotal(total);
+  }, [products]);
+  const handleQuantityChange = (id, newQuantity) => {
+    const updatedData = products.map((item) => {
+      if (item.id === id) {
+        return { ...item, quantity: newQuantity }; // تحديث الكمية فقط
+      }
+      return item; 
+    });
+    setProduct(updatedData)
   };
 
   const validateForm = () => {
@@ -54,6 +78,16 @@ const SimpleForm = () => {
   const handleSubmitOrder = async () => {
     if (!validateForm()) return;
 
+    const orders = data.map((product) => ({
+      product: {
+        name: product.name,
+        img: product.img,
+        price: product.price,
+        quantity: product.quantity,
+      },
+      totalPrice: product.quantity * product.price,
+    }));
+
     try {
       await addDoc(collection(db, "orders"), {
         firstname: formData.firstname,
@@ -61,14 +95,7 @@ const SimpleForm = () => {
         phone: formData.phone,
         address: formData.address,
         notes: formData.notes,
-        quantity: formData.quantity,
-        deliveryFee: 10,
-        totalPrice: (formData.quantity * price) + 10,
-        product: {
-          name: name,
-          img: img,
-          price: price,
-        },
+        orders: orders,
         orderDate: new Date().toISOString(),
       });
       Swal.fire({
@@ -76,20 +103,13 @@ const SimpleForm = () => {
         text: "Order placed successfully!",
         icon: "success",
         confirmButtonText: "OK",
-        customClass: {
-          confirmButton: "swal-ok-button"
-        }
       }).then(() => {
-        window.location.href = "/menu"; 
-      })
+        window.location.href = "/menu";
+      });
     } catch (error) {
       Swal.fire("Error", "Error placing order. Please try again.", "error");
     }
   };
-
-  const unitPrice = price;
-  const deliveryFee = 5;
-  const totalPrice = (unitPrice * formData.quantity) + deliveryFee;
 
   return (
     <div className="formbold-main-wrapper-checkout">
@@ -98,7 +118,9 @@ const SimpleForm = () => {
           <>
             <div className="formbold-input-flex-checkout">
               <div className="firstName">
-                <label className="formbold-form-label-checkout">First Name</label>
+                <label className="formbold-form-label-checkout">
+                  First Name
+                </label>
                 <input
                   type="text"
                   name="firstname"
@@ -109,7 +131,9 @@ const SimpleForm = () => {
                 />
               </div>
               <div>
-                <label className="formbold-form-label-checkout">Last Name</label>
+                <label className="formbold-form-label-checkout">
+                  Last Name
+                </label>
                 <input
                   type="text"
                   name="lastname"
@@ -121,7 +145,9 @@ const SimpleForm = () => {
               </div>
             </div>
             <div className="formbold-mb-3-checkout">
-              <label className="formbold-form-label-checkout">Phone Number</label>
+              <label className="formbold-form-label-checkout">
+                Phone Number
+              </label>
               <input
                 type="number"
                 name="phone"
@@ -158,35 +184,70 @@ const SimpleForm = () => {
                 onChange={handleChange}
               ></textarea>
             </div>
-            <div className="product-container">
-              <img src={img} alt="Product" className="product-image" />
-              <div className="product-details">
-                <span className="product-name">{name}</span>
-                <div className="quantity-controls">
-                  <button onClick={() => handleQuantityChange(-1)}>-</button>
-                  <span className="quantity">{formData.quantity}</span>
-                  <button onClick={() => handleQuantityChange(1)}>+</button>
+
+            {data.map((product, index) => (
+              <div key={index} className="product-container">
+                <img
+                  src={product.img}
+                  alt={product.name}
+                  className="product-image"
+                />
+                <div className="product-details">
+                  <span className="product-name">{product.name}</span>
+                  <div className="quantity-controls">
+                    <button onClick={() => handleQuantityChange(index, -1)}>
+                      -
+                    </button>
+                    <span className="quantity">{product.quantity}</span>
+                    <button onClick={() => handleQuantityChange(index, 1)}>
+                      +
+                    </button>
+                  </div>
+                  <span className="product-price">
+                    ${product.price.toFixed(2)}
+                  </span>
                 </div>
               </div>
-            </div>
-            <button type="button" className="formbold-btn-checkout" onClick={handleSubmit}>
+            ))}
+
+            <button
+              type="button"
+              className="formbold-btn-checkout"
+              onClick={handleSubmit}
+            >
               Continue
             </button>
           </>
         )}
 
-{showSummary && (
+        {showSummary && (
           <div className="order-summary">
-            <img src={img} alt="Product" />
             <h2>Order Summary</h2>
-            <div className="text-container">
-              <p><strong>Product:</strong> {name}</p>
-              <p><strong>Quantity:</strong> {formData.quantity}</p>
-              <p><strong>Price:</strong> {price}</p>
-              <p><strong>Delivery Cost:</strong> $5.00</p>
-              <p><strong>Total Price:</strong> ${(formData.quantity * price + 5).toFixed(2)}</p>
-            </div>
-            <button className="order-now-btn" onClick={handleSubmitOrder}>Order Now</button>
+            {data.map((product, index) => (
+            <>
+              <div key={index} className="summary-item">
+                <img src={product.img} alt={product.name} />
+                <p>
+                  <strong>Product:</strong> {product.name}
+                </p>
+                <p>
+                  <strong>Quantity:</strong> {product.quantity}
+                </p>
+                <p>
+                  <strong>Price:</strong> ${product.price.toFixed(2)}
+                </p>
+                <p>
+                  <strong>Total product price:</strong> $
+                  {(product.quantity * product.price).toFixed(2)}
+                </p>
+              </div>
+              <hr></hr>
+            </>
+            ))}
+            <h3 className="totalPrice">Total price : {total}</h3>
+            <button className="order-now-btn" onClick={handleSubmitOrder}>
+              Order Now
+            </button>
           </div>
         )}
       </div>

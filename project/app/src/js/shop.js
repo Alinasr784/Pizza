@@ -24,7 +24,7 @@ function Shop() {
 
   const handleOrderOnline = (img, name, price) => {
     if (img && name) {
-      navigate('/checkout', { state: { img, name , price} });
+      navigate('/checkout', { state: [{ img, name , price}] });
     } else {
       console.error("Product data is missing:", { img, name });
     }

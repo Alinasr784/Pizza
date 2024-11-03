@@ -18,7 +18,7 @@
 
 .formbold-input-flex-checkout {
   display: flex;
-  flex-direction: column; /* تغيير الاتجاه ليتناسب مع الموبايل */
+  flex-direction: row; /* تغيير الاتجاه ليتناسب مع الموبايل */
   margin-bottom: 15px; /* مسافة بين الحقول */
   width: 100%; /* عرض الحقول */
 }
@@ -110,4 +110,76 @@
 .quantity {
   font-size: 16px; /* حجم الخط للعدد */
   margin: 0 10px; /* مسافة حول العدد */
+}
+
+.order-summary {
+  background-color: #ffffff; /* خلفية بيضاء */
+  padding: 25px; /* زيادة الحشوة */
+  border-radius: 12px; /* زوايا دائرية */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* ظل أعمق */
+  margin-top: 30px; /* مسافة من الأعلى */
+  text-align: center; /* توسيط النص */
+  transition: transform 0.3s; /* تأثير التحويل */
+}
+
+.order-summary:hover {
+  transform: scale(1.02); /* تأثير تكبير خفيف عند المرور */
+}
+
+.order-summary img {
+  width: 150px; /* حجم الصورة أكبر */
+  height: auto; /* الحفاظ على نسبة العرض إلى الارتفاع */
+  border-radius: 8px; /* زوايا دائرية للصورة */
+  margin-bottom: 15px; /* مسافة تحت الصورة */
+  border: 2px solid #007bff; /* إضافة حد للصورة */
+}
+
+/* تنسيق النصوص */
+.text-container {
+  margin: 15px 0; /* مسافة من الأعلى والأسفل */
+  padding: 10px; /* حشوة داخلية */
+  background-color: #f0f8ff; /* خلفية خفيفة */
+  border-radius: 8px; /* زوايا دائرية للخلفية */
+}
+
+.order-summary h2 {
+  font-size: 24px; /* حجم الخط لعناوين الطلب */
+  color: #222; /* لون أكثر عمقًا */
+  margin: 10px 0; /* مسافة من الأعلى والأسفل */
+  font-family: 'Arial', sans-serif; /* تغيير نوع الخط */
+  font-weight: bold; /* جعل الخط عريض */
+}
+
+.order-summary p {
+  margin: 5px 0; /* مسافة من الأعلى والأسفل */
+  font-size: 18px; /* حجم الخط للنصوص */
+  color: #666; /* لون النص */
+  line-height: 1.5; /* زيادة المسافة بين الأسطر */
+  text-align:left;
+}
+
+.order-now-btn {
+  margin-top: 20px; /* مسافة من الأعلى */
+  padding: 12px 25px; /* حجم الزر أكبر */
+  background-color: #28a745; /* لون الزر أخضر */
+  color: #fff; /* لون النص */
+  border: none; /* إزالة الحدود */
+  border-radius: 5px; /* زوايا دائرية */
+  cursor: pointer; /* تغيير المؤشر عند المرور */
+  font-size: 16px; /* حجم الخط للزر */
+  font-weight: bold; /* جعل النص عريض */
+  transition: background-color 0.3s, transform 0.2s; /* تأثيرات التحويل */
+}
+
+.order-now-btn:hover {
+  background-color: #218838; /* لون الزر عند المرور */
+  transform: translateY(-2px); /* رفع الزر عند المرور */
+}
+
+.swal-ok-button {
+  width: 80vw !important;
+  padding: 10px 0;
+  background-color: #3085d6;
+  color: white;
+  font-size: 16px;
 }

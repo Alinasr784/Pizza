@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from 'react-router-dom';
 if (window.innerWidth > 599) {
   import("../css/landing-tablet.css");
 } else {
@@ -19,6 +20,7 @@ function Text() {
   );
 }
 function BtnsLanding() {
+  const navigate = useNavigate();
   const handleMenuClick = (path) => {
     window.location.href = path; // توجيه المستخدم لصفحة checkout
   };
@@ -27,7 +29,7 @@ function BtnsLanding() {
       <div
         className="orderBtn"
         onClick={() => {
-          handleMenuClick("/menu");
+          navigate('/menu');
         }}
       >
         Order Online

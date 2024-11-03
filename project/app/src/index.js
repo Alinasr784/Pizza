@@ -7,7 +7,6 @@ import Apps from './js/apps';
 import CardPage from './js/cards';
 import Shop from './js/shop';
 import FormBold from './js/comOrder'; 
-import CartBtn from './js/cartbtn';
 import Menu from './js/menu';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 function Home(){
@@ -17,7 +16,6 @@ function Home(){
       <Apps />
       <CardPage/>
       <Shop/>
-      <CartBtn/>
     </div>
       
   )
@@ -26,7 +24,6 @@ function Store() {
   return(
   <>
     <Menu/>
-    <CartBtn/>
   </>
   )
 }

@@ -4,6 +4,7 @@ if (window.innerWidth > 599) {
 } else {
   import('../css/apps-phone.css')
 }
+
 function TextApp() {
   return (
     <div className="textParent-app">

@@ -110,7 +110,15 @@ function Store() {
 
   const handleOrderOnline = (product) => {
     if (product && product.img && product.name) {
-      navigate('/checkout', { state: [{ img: product.img, name: product.name, price: product.price, quantity:product.quantity}] });
+      navigate('/checkout', {
+        state: [{
+          img: product.img,
+          name: product.name,
+          price: product.price,
+          quantity: product.quantity || 1, // تأكد من وجود الكمية
+          id: product.id,
+        }]
+      });
     } else {
       console.error("Product data is missing:", product);
     }

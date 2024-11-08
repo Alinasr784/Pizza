@@ -8,12 +8,17 @@ import "../css/comOrders.css";
 const SimpleForm = () => {
   const location = useLocation();
   const data = location.state || []; // تأكد من وجود البيانات
-  const [products,setProduct]=useState([])
-  const [total,setTotal]=useState(0)
+  const [products, setProduct] = useState([]);
+  const [total, setTotal] = useState(0);
+  const [quantity, setQuantity] = useState(1);
 
-  useEffect(()=>{
-    setProduct(data)
-  },[data])
+  useEffect(() => {
+    const updatedProducts = data.map((product) => ({
+      ...product,
+      quantity: product.quantity || 1, // Default quantity to 1 if not already set
+    }));
+    setProduct(updatedProducts);
+  }, [data]);
 
   const [formData, setFormData] = useState({
     firstname: "",
@@ -46,20 +51,21 @@ const SimpleForm = () => {
   useEffect(() => {
     const total = products.reduce(
       (acc, item) => acc + item.price * item.quantity,
-      0
+      0,
     );
     setTotal(total);
   }, [products]);
-  const handleQuantityChange = (id, newQuantity) => {
+  const handleQuantityChange = (id, change) => {
     const updatedData = products.map((item) => {
       if (item.id === id) {
-        return { ...item, quantity: newQuantity }; // تحديث الكمية فقط
+        const newQuantity = Math.max(1, item.quantity + change); // تأكد أن الكمية لا تقل عن 1
+        return { ...item, quantity: newQuantity };
       }
-      return item; 
+      return item; // أبقِ العناصر الأخرى كما هي
     });
-    setProduct(updatedData)
+    setProduct(updatedData); // تحديث الحالة بالمصفوفة المعدلة
+    console.log("Updated products:", updatedData); // طباعة المنتجات المعدلة في وحدة التحكم للتحقق
   };
-
   const validateForm = () => {
     const { firstname, lastname, phone, address } = formData;
     if (!firstname || !lastname || !phone || !address) {
@@ -68,18 +74,17 @@ const SimpleForm = () => {
     }
     return true;
   };
-
   const handleSubmit = () => {
     if (!validateForm()) return;
     setShowSummary(true);
     setShowForm(false);
   };
-
   const handleSubmitOrder = async () => {
     if (!validateForm()) return;
 
     const orders = data.map((product) => ({
       product: {
+        id: product.id,
         name: product.name,
         img: product.img,
         price: product.price,
@@ -110,6 +115,12 @@ const SimpleForm = () => {
       Swal.fire("Error", "Error placing order. Please try again.", "error");
     }
   };
+  useEffect(() => {
+    setQuantity(products.quantity);
+  }, [products]);
+  useEffect(() => {
+    console.log(quantity);
+  }, [quantity]);
 
   return (
     <div className="formbold-main-wrapper-checkout">
@@ -185,8 +196,8 @@ const SimpleForm = () => {
               ></textarea>
             </div>
 
-            {data.map((product, index) => (
-              <div key={index} className="product-container">
+            {products.map((product) => (
+              <div key={product.id} className="product-container">
                 <img
                   src={product.img}
                   alt={product.name}
@@ -195,11 +206,13 @@ const SimpleForm = () => {
                 <div className="product-details">
                   <span className="product-name">{product.name}</span>
                   <div className="quantity-controls">
-                    <button onClick={() => handleQuantityChange(index, -1)}>
+                    <button
+                      onClick={() => handleQuantityChange(product.id, -1)}
+                    >
                       -
                     </button>
-                    <span className="quantity">{product.quantity}</span>
-                    <button onClick={() => handleQuantityChange(index, 1)}>
+                    <span className="quantity-cart">{product.quantity}</span>
+                    <button onClick={() => handleQuantityChange(product.id, 1)}>
                       +
                     </button>
                   </div>
@@ -223,26 +236,26 @@ const SimpleForm = () => {
         {showSummary && (
           <div className="order-summary">
             <h2>Order Summary</h2>
-            {data.map((product, index) => (
-            <>
-              <div key={index} className="summary-item">
-                <img src={product.img} alt={product.name} />
-                <p>
-                  <strong>Product:</strong> {product.name}
-                </p>
-                <p>
-                  <strong>Quantity:</strong> {product.quantity}
-                </p>
-                <p>
-                  <strong>Price:</strong> ${product.price.toFixed(2)}
-                </p>
-                <p>
-                  <strong>Total product price:</strong> $
-                  {(product.quantity * product.price).toFixed(2)}
-                </p>
-              </div>
-              <hr></hr>
-            </>
+            {products.map((product, index) => (
+              <>
+                <div key={index} className="summary-item">
+                  <img src={product.img} alt={product.name} />
+                  <p>
+                    <strong>Product:</strong> {product.name}
+                  </p>
+                  <p>
+                    <strong>Quantity:</strong> {product.quantity}
+                  </p>
+                  <p>
+                    <strong>Price:</strong> ${product.price.toFixed(2)}
+                  </p>
+                  <p>
+                    <strong>Total product price:</strong> $
+                    {(product.quantity * product.price).toFixed(2)}
+                  </p>
+                </div>
+                <hr></hr>
+              </>
             ))}
             <h3 className="totalPrice">Total price : {total}</h3>
             <button className="order-now-btn" onClick={handleSubmitOrder}>
